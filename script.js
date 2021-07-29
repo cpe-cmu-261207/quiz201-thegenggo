@@ -10,6 +10,8 @@ const reset = document.getElementById('reset')
 const text = document.getElementById('text')
 const oldAuthorHTML = author.innerHTML
 const oldTextHTML = text.innerHTML
+const oldArr = text.innerHTML.split(" ")
+const outputArr = text.innerHTML.split(" ")
 let toggleStatus = false
 
 btn_toggle.onclick = () => {
@@ -30,26 +32,12 @@ btn_toggle.onclick = () => {
 search.onclick = () => {
   const inputText = text.innerText
   const arr = inputText.split(" ")
-  console.log(arr)
-  const newArr = arr.map((x) => {
-    if (x.length >= parseInt(length.value)) {
-      return "<span style = 'color: " + color.value + "'>" + x + "</span>"
-    }
-    else {
-      return x
-    }
-  })
-  console.log(newArr)
-  text.innerHTML = newArr.join(" ")
-
-  // const inputText = text.innerText
-  // const arr = inputText.split(" ")
-  // const newArr = arr.filter((x) => x.length >= parseInt(length.value))
-  // console.log(newArr)
-  // for (let x of newArr) {
-  //   const re = new RegExp(x, "g")
-  //   text.innerHTML = text.innerHTML.replace(re, "<span style = 'color: " + color.value + "'>" + x + "</span>")
-  // }
+  console.log(oldArr)
+  for (let x in oldArr){
+    if(oldArr[x].length >= parseInt(length.value))
+    outputArr[x] = "<span style = 'color: " + color.value + "'>" + oldArr[x] + "</span>"
+  }
+  text.innerHTML = outputArr.join(" ")
 }
 
 reset.onclick = () => {
