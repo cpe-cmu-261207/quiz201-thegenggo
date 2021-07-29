@@ -9,18 +9,19 @@ const search = document.getElementById('search')
 const reset = document.getElementById('reset')
 const text = document.getElementById('text')
 const oldAuthorHTML = author.innerHTML
-const oldTextHTML = author.innerHTML
+const oldTextHTML = text.innerHTML
 let toggleStatus = false
 
 btn_toggle.onclick = () => {
   // your code here
   if (!toggleStatus) {
     author.innerHTML = parseInt(oldAuthorHTML) + parseInt(length.value)
+    btn_toggle.innerHTML = "Show Calculation"
     toggleStatus = true
   }
   else {
     author.innerHTML = oldAuthorHTML
-    console.log(oldAuthorHTML)
+    btn_toggle.innerHTML = "Show Author"
     toggleStatus = false
   }
 }
@@ -29,17 +30,28 @@ btn_toggle.onclick = () => {
 search.onclick = () => {
   const inputText = text.innerText
   const arr = inputText.split(" ")
+  console.log(arr)
   const newArr = arr.map((x) => {
-    if (x >= parseInt(length.value)) {
-      return "<span style = 'color: " + color.value + "'></span>"
+    if (x.length >= parseInt(length.value)) {
+      return "<span style = 'color: " + color.value + "'>" + x + "</span>"
     }
     else {
       return x
     }
   })
   console.log(newArr)
+  text.innerHTML = newArr.join(" ")
+
+  // const inputText = text.innerText
+  // const arr = inputText.split(" ")
+  // const newArr = arr.filter((x) => x.length >= parseInt(length.value))
+  // console.log(newArr)
+  // for (let x of newArr) {
+  //   const re = new RegExp(x, "g")
+  //   text.innerHTML = text.innerHTML.replace(re, "<span style = 'color: " + color.value + "'>" + x + "</span>")
+  // }
 }
 
 reset.onclick = () => {
-
+  text.innerHTML = oldTextHTML
 }
